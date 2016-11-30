@@ -15,10 +15,10 @@ def introduction():
     #play the introduction menu
     res = '<?xml version="1.0" encoding="UTF-8"?>'
     res+='<Response>'
-    res+='<Say>Hello</Say>'
-    #res+='<Play url = "https://7ac21b62.ngrok.io/recording/Region.mp3"/>'
+    res+='<Play url = "https://raw.githubusercontent.com/flacode/climate/master/recording/Region.mp3"/>'
     #res+= '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/region"></GetDigits>'
     res+='</Response>'
+
     res = make_response(res, 200)
     res.headers['Content-Type'] = "application/xml"
     return res
