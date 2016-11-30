@@ -3,20 +3,13 @@ import os
 
 app = Flask(__name__)
 
-#urls to the pre_recorded messages
-LAG_MENU=os.path.abspath('/home/flavia/Dropbox/django/climate/recording/Welcome.mp3')
-#ENG_REGION=os.path.abspath("/home/flavia/Dropbox/django/climate/recording/Region.mp3")
-ENG_INFO=""
-ENG_SOLUTION=""
-
-
 @app.route('/introduction', methods = ['POST', 'GET'])
 def introduction():
     #play the introduction menu
     res = '<?xml version="1.0" encoding="UTF-8"?>'
     res+='<Response>'
-    res+='<Play url = "https://raw.githubusercontent.com/flacode/climate/master/recording/Region.mp3"/>'
-    #res+= '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/region"></GetDigits>'
+    res+='<Play url = "https://raw.githubusercontent.com/flacode/climate/master/recording/Welcome.mp3"/>'
+    res+= '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/region"></GetDigits>'
     res+='</Response>'
 
     res = make_response(res, 200)
@@ -31,9 +24,12 @@ def region():
     if language ==  1:
         res = '<?xml version="1.0" encoding="UTF-8"?>'
         res += '<Response>'
-        res += '<Play url = "ENG_REGION"/>'
-        res += '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/information"></GetDigits></Response>'
+        res += '<Play url = "https://raw.githubusercontent.com/flacode/climate/master/recording/Region2.mp3"/>'
+        res += '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/information"></GetDigits>'
         res += '</Response>'
+
+        res = make_response(res, 200)
+        res.headers['Content-Type'] = "application/xml"
         return res
 
 
@@ -44,9 +40,12 @@ def information():
     if region == 4:
         res = '<?xml version="1.0" encoding="UTF-8"?>'
         res += '<Response>'
-        res += '<Play url = "ENG_INFO"/>'
-        res += '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/solution"></GetDigits></Response>'
+        res += '<Play url = "https://raw.githubusercontent.com/flacode/climate/master/recording/Menu.mp3"/>'
+        res += '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/solution"></GetDigits>'
         res += '</Response>'
+
+        res = make_response(res, 200)
+        res.headers['Content-Type'] = "application/xml"
         return res
 
 
@@ -57,9 +56,12 @@ def solution():
     if information == 2:
         res = '<?xml version="1.0" encoding="UTF-8"?>'
         res += '<Response>'
-        res += '<Play url = "ENG_SOLUTION"/>'
-        res += '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/solution"></GetDigits></Response>'
+        res += '<Play url = "https://raw.githubusercontent.com/flacode/climate/master/recording/Output.mp3"/>'
+        res += '<GetDigits timeout="20" numDigits="1" callbackUrl="https://7ac21b62.ngrok.io/solution"></GetDigits>'
         res += '</Response>'
+
+        res = make_response(res, 200)
+        res.headers['Content-Type'] = "application/xml"
         return res
 
 
